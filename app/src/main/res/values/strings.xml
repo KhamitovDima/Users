@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Users</string>
+    <string name="title_category">User</string>
+    <string name="str_download_err">Произошла ошибка при загрузке данных. Проверьте подключение к сети</string>
+    <string name="repeat_download_btn_lbl">Повторить</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
