@@ -1,19 +1,20 @@
-package com.h.users.ui
+package com.h.users.viewmodel
 
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.h.users.data.User
 import com.h.users.repo.Repository
-import io.reactivex.disposables.CompositeDisposable
+import javax.inject.Inject
 
 enum class ApiStatus { LOADING, ERROR, DONE }
 
-class UsersViewModel(app: Application) : AndroidViewModel(app) {
+class UsersViewModel @Inject constructor(
+    private val repository: Repository
+) : ViewModel() {
     private val TAG = "UsersViewModel"
-    private val repository = Repository(app)
     private var page = 1
 
     private val _status = repository.status
@@ -47,6 +48,11 @@ class UsersViewModel(app: Application) : AndroidViewModel(app) {
     fun loadIfDbIsEmpty() {
             Log.d(TAG, "loadIfDbIsEmpty")
             repository.loadIfDbIsEmpty()
+    }
+
+    override fun onCleared() {
+        repository.compositeDisposable.clear()
+        super.onCleared()
     }
 
 }
